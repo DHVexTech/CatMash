@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,23 +18,14 @@ namespace CatMash.Models
     {
         public List<Cat> GetAll()
         {
-            var json = new WebClient().DownloadString("https://latelier.co/data/cats.json");
-            JObject catsJson = JObject.Parse(json);
+            // change the path for the futur
+            JObject catsJson = JObject.Parse(File.ReadAllText(@"D:\In'Tech\PI\CatMash\CatMash\CatMash\App_Data\Cats.JSON"));
             List<JToken> results = catsJson["images"].Children().ToList();
             List<Cat> cats = new List<Cat>();
             foreach (JToken result in results)
             {
                 Cat cat = result.ToObject<Cat>();
-
-                try
-                {
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(cat.URL);
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                    if (response.StatusCode == HttpStatusCode.OK)
-                        cats.Add(cat);
-                }
-                catch(Exception e) {}
+                cats.Add(cat);
             }
             return cats;
         }

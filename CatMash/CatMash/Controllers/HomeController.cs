@@ -16,14 +16,14 @@ namespace CatMash.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult SeeCats()
         {
             ViewBag.Message = "Your application description page.";
             List<Cat> cats = catContext.GetAll();
             return View(cats);
         }
 
-        public ActionResult Contact()
+        public ActionResult VoteForCats()
         {
             ViewBag.Message = "Your contact page.";
 
