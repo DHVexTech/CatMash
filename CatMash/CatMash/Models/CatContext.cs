@@ -18,8 +18,7 @@ namespace CatMash.Models
     {
         public List<Cat> GetAll()
         {
-            // change the path for the futur
-            JObject catsJson = JObject.Parse(File.ReadAllText(@"D:\In'Tech\PI\CatMash\CatMash\CatMash\App_Data\Cats.JSON"));
+            JObject catsJson = JObject.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Cats.JSON")));
             List<JToken> results = catsJson["images"].Children().ToList();
             List<Cat> cats = new List<Cat>();
             foreach (JToken result in results)

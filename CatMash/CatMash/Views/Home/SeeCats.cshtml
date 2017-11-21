@@ -9,8 +9,10 @@
         <h1 class="title">Chats :</h1>
             @foreach (var cat in Model)
             {
-                <img src="@Html.DisplayFor(model => cat.URL)" width="150px" height="150px" />
+                <div style="display:inline-block;text-align:center;">
+                    <img src="@Html.DisplayFor(model => cat.URL)" width="150px" height="150px" />
+                    <p>Vote : 0</p>
+                </div>
             }
     </div>
 </div>
-
