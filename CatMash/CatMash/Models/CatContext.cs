@@ -11,8 +11,8 @@ namespace CatMash.Models
 {
     public class Cat
     {
-        public string id { get; set; }
-        public string url { get; set; }
+        public string Id { get; set; }
+        public string Url { get; set; }
         public int Vote { get; set; }
     }
 
@@ -59,6 +59,10 @@ namespace CatMash.Models
             return rdmCats;
         }
 
-
+        public void AddVote(string id)
+        {
+            Cat cat = Cats.Single(c => c.Id == id);
+            cat.Vote++;
+        }
     }
 }

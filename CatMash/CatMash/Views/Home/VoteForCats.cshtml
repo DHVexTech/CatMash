@@ -7,10 +7,10 @@
     @foreach (var cat in Model)
     {
         <div style="display:inline-block;text-align:center">
-            <img src="@Html.DisplayFor(model => cat.URL)" width="400" height="400" style="align-content:center" />
+            <img src="@Html.DisplayFor(model => cat.Url)" width="400" height="400" style="align-content:center" />
             @using (Html.BeginForm("VoteForCats", "Home", FormMethod.Post))
             {
-                <button name="id" value="@Html.DisplayFor(model => cat.ID)">Voter</button>
+                <button name="id" value="@Html.DisplayFor(model => cat.Id)">Voter</button>
             }
         </div>
      }
