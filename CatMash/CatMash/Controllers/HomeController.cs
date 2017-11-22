@@ -20,11 +20,7 @@ namespace CatMash.Controllers
             return View();
         }
 
-        public ActionResult SeeCats()
-        {
-            List<Cat> cats = catContext.Cats;
-            return View(cats);
-        }
+        public ActionResult SeeCats() => View(catContext.Cats);
 
         public ActionResult VoteForCats(string id)
         {

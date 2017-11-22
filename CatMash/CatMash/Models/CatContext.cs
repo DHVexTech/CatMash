@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CatMash.Models.Singleton;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -20,27 +21,19 @@ namespace CatMash.Models
     {
         Random rdm;
         List<Cat> cats;
+        CatSingleton catSingleton;
+
         public CatContext()
         {
+            catSingleton = CatSingleton.GetInstance;
             rdm = new Random();
-            cats = GetAll();
+            cats = new List<Cat>();
+            GetAll();
         }
 
         public List<Cat> Cats => cats;
 
-        public List<Cat> GetAll()
-        {
-            JObject catsJson = JObject.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Cats.JSON")));
-            List<JToken> results = catsJson["images"].Children().ToList();
-            List<Cat> cats = new List<Cat>();
-            foreach (JToken result in results)
-            {
-                Cat cat = result.ToObject<Cat>();
-                cats.Add(cat);
-            }
-            cats.Sort((c1, c2) => c1.Vote.CompareTo(c2.Vote));
-            return cats;
-        }
+        public List<Cat> GetAll() => cats = catSingleton.Cats;
 
         public List<Cat> GetTwoRandomCat()
         {
@@ -52,17 +45,13 @@ namespace CatMash.Models
             {
                 rdmNumber[1] = rdm.Next(0, cats.Count);
             }
-            for (int i = 0; i <= 1; i++)
+            for (int i = 0; i < 2; i++)
             {
                 rdmCats.Add(cats[rdmNumber[i]]);
             }
             return rdmCats;
         }
 
-        public void AddVote(string id)
-        {
-            Cat cat = Cats.Single(c => c.Id == id);
-            cat.Vote++;
-        }
+        public void AddVote(string id) => catSingleton.Cats.Single(c => c.Id == id).Vote++;
     }
 }
