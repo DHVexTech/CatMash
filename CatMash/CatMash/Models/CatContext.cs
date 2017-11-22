@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using CatMash.Models.Singleton;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,23 +12,45 @@ namespace CatMash.Models
 {
     public class Cat
     {
-        public string ID { get; set; }
-        public string URL { get; set; }
+        public string Id { get; set; }
+        public string Url { get; set; }
+        public int Vote { get; set; }
     }
 
     public class CatContext
     {
+        Random rdm;
+        CatSingleton catSingleton;
+
+        public CatContext()
+        {
+            catSingleton = CatSingleton.GetInstance;
+            rdm = new Random();
+        }
+
         public List<Cat> GetAll()
         {
-            JObject catsJson = JObject.Parse(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Data/Cats.JSON")));
-            List<JToken> results = catsJson["images"].Children().ToList();
-            List<Cat> cats = new List<Cat>();
-            foreach (JToken result in results)
-            {
-                Cat cat = result.ToObject<Cat>();
-                cats.Add(cat);
-            }
-            return cats;
+            catSingleton.Cats.Sort((c1, c2) => c2.Vote.CompareTo(c1.Vote));
+            return catSingleton.Cats;
         }
+
+        public List<Cat> GetTwoRandomCat()
+        {
+            List<Cat> rdmCats = new List<Cat>();
+            List<int> rdmNumber = new List<int>();
+            rdmNumber.Add(rdm.Next(0, catSingleton.Cats.Count));
+            rdmNumber.Add(rdm.Next(0, catSingleton.Cats.Count));
+            while (rdmNumber[0] == rdmNumber[1])
+            {
+                rdmNumber[1] = rdm.Next(0, catSingleton.Cats.Count);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                rdmCats.Add(catSingleton.Cats[rdmNumber[i]]);
+            }
+            return rdmCats;
+        }
+
+        public void AddVote(string id) => catSingleton.Cats.Single(c => c.Id == id).Vote++;
     }
 }
