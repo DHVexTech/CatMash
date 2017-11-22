@@ -41,7 +41,6 @@ namespace CatMash.Models.Singleton
                 Cat cat = result.ToObject<Cat>();
                 listOfCats.Add(cat);
             }
-            listOfCats.Sort((c1, c2) => c1.Vote.CompareTo(c2.Vote));
             return listOfCats;
         }
     }

@@ -20,34 +20,33 @@ namespace CatMash.Models
     public class CatContext
     {
         Random rdm;
-        List<Cat> cats;
         CatSingleton catSingleton;
 
         public CatContext()
         {
             catSingleton = CatSingleton.GetInstance;
             rdm = new Random();
-            cats = new List<Cat>();
-            GetAll();
         }
 
-        public List<Cat> Cats => cats;
-
-        public List<Cat> GetAll() => cats = catSingleton.Cats;
+        public List<Cat> GetAll()
+        {
+            catSingleton.Cats.Sort((c1, c2) => c2.Vote.CompareTo(c1.Vote));
+            return catSingleton.Cats;
+        }
 
         public List<Cat> GetTwoRandomCat()
         {
             List<Cat> rdmCats = new List<Cat>();
             List<int> rdmNumber = new List<int>();
-            rdmNumber.Add(rdm.Next(0, cats.Count));
-            rdmNumber.Add(rdm.Next(0, cats.Count));
+            rdmNumber.Add(rdm.Next(0, catSingleton.Cats.Count));
+            rdmNumber.Add(rdm.Next(0, catSingleton.Cats.Count));
             while (rdmNumber[0] == rdmNumber[1])
             {
-                rdmNumber[1] = rdm.Next(0, cats.Count);
+                rdmNumber[1] = rdm.Next(0, catSingleton.Cats.Count);
             }
             for (int i = 0; i < 2; i++)
             {
-                rdmCats.Add(cats[rdmNumber[i]]);
+                rdmCats.Add(catSingleton.Cats[rdmNumber[i]]);
             }
             return rdmCats;
         }
