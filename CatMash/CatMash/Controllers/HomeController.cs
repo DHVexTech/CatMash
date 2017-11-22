@@ -9,7 +9,11 @@ namespace CatMash.Controllers
 {
     public class HomeController : Controller
     {
-        public CatContext catContext = new CatContext();
+        public CatContext catContext;
+        public HomeController()
+        {
+            catContext = new CatContext();
+        }
 
         public ActionResult Index()
         {
@@ -18,16 +22,17 @@ namespace CatMash.Controllers
 
         public ActionResult SeeCats()
         {
-            ViewBag.Message = "Your application description page.";
-            List<Cat> cats = catContext.GetAll();
+            List<Cat> cats = catContext.Cats;
             return View(cats);
         }
 
-        public ActionResult VoteForCats()
+        public ActionResult VoteForCats(string id)
         {
-            ViewBag.Message = "Your contact page.";
+            if (id != null)
+                catContext.AddVote(id);
 
-            return View();
+            List<Cat> RandomCats = catContext.GetTwoRandomCat();
+            return View(RandomCats);
         }
     }
 }

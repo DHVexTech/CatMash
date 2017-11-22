@@ -1,17 +1,17 @@
-﻿@{
+﻿@model IEnumerable<CatMash.Models.Cat>
+@{
     ViewBag.Title = "VoteForCats";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    @foreach (var cat in Model)
+    {
+        <div style="display:inline-block;text-align:center">
+            <img src="@Html.DisplayFor(model => cat.URL)" width="400" height="400" style="align-content:center" />
+            @using (Html.BeginForm("VoteForCats", "Home", FormMethod.Post))
+            {
+                <button name="id" value="@Html.DisplayFor(model => cat.ID)">Voter</button>
+            }
+        </div>
+     }
 </address>

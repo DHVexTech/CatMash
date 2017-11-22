@@ -31,3 +31,8 @@ textarea {
     display:inline-block;
     text-align: center;
 }
+
+.catVote {
+    padding-left:100px;
+    align-content:center;
+}
