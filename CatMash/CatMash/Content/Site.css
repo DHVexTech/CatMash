@@ -30,3 +30,18 @@ textarea {
 .action-button{
     text-align:center;
 }
+
+.CatVote {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 10%;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.vote-button{
+    margin-top:5%;
+    width:50%;
+    height:50%;
+}
