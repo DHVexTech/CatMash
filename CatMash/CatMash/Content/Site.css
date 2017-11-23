@@ -45,3 +45,8 @@ textarea {
     width:50%;
     height:50%;
 }
+
+.cat {
+    display: inline-block;
+    text-align: center;
+}
