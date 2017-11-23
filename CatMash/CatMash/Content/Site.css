@@ -23,16 +23,30 @@ textarea {
     max-width: 280px;
 }
 
-.title {
-    text-align : center;
-}
-
-.catBlock {
-    display:inline-block;
+.title{
     text-align: center;
 }
 
-.catVote {
-    padding-left:100px;
-    align-content:center;
+.action-button{
+    text-align:center;
+}
+
+.CatVote {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 10%;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.vote-button{
+    margin-top:5%;
+    width:50%;
+    height:50%;
+}
+
+.cat {
+    display: inline-block;
+    text-align: center;
 }
