@@ -1,0 +1,18 @@
+﻿@model IEnumerable<CatMash.Models.Cat>
+@{
+    ViewBag.Title = "VoteForCats";
+}
+
+<address>
+    @foreach (var cat in Model)
+    {
+        <div class="CatVote">
+            <img src="@Html.DisplayFor(model => cat.Url)" width="400" height="400" style="align-content:center" />
+            @using (Html.BeginForm("VoteForCats", "Home", FormMethod.Post))
+            {
+                <button name="id" class="btn btn-danger vote-button" value="@Html.DisplayFor(model => cat.Id)">Voter</button>
+                <p></p>
+            }
+        </div>
+     }
+</address>

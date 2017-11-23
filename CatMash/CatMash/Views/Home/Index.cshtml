@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model IEnumerable<CatMash.Models.Cat>
+
+<div class="jumbotron home-element">
+    <h2 class="title">Bienvenue sur</h2>
+    <h1 class="title">CatMash</h1>
+    <p class="title">CatMash est une application web qui permet de trouver le chat le plus mignon.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="action-button">
+            <a href="http://catmashlatelier.azurewebsites.net/Home/VoteForCats" class="btn btn-primary btn-lg">Voter &raquo;</a>
+            <a href="http://catmashlatelier.azurewebsites.net/Home/SeeCats" class="btn btn-primary btn-lg">Voir les chats &raquo;</a>
+        </div>
+    </div>
+</div>
