@@ -23,16 +23,10 @@ textarea {
     max-width: 280px;
 }
 
-.title {
-    text-align : center;
-}
-
-.catBlock {
-    display:inline-block;
+.title{
     text-align: center;
 }
 
-.catVote {
-    padding-left:100px;
-    align-content:center;
+.action-button{
+    text-align:center;
 }
